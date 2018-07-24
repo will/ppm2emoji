@@ -1,0 +1,13 @@
+name: ppm2emoji
+version: 0.1.0
+
+authors:
+  - Will Leinweber <will@bitfission.com>
+
+targets:
+  ppm2emoji:
+    main: src/ppm2emoji.cr
+
+crystal: 0.25.0
+
+license: MIT

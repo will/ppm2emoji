@@ -1,0 +1,8 @@
+/docs/
+/lib/
+/bin/
+/.shards/
+img-apple-160
+*.dwarf
+emoji
+ppm2emoji
