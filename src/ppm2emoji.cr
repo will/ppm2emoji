@@ -32,6 +32,7 @@ def read_header
 end
 
 loop {
+  puts "\033[2J"
   x, y, max = read_header
   (y).times {
     x.times {
