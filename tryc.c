@@ -68,7 +68,9 @@ int main(void) {
         printIntFromStdin(); putc_unlocked(';', stdout);
         printIntFromStdin();
         //fputs("m█\x1b[0m", stdout);
-        putc_unlocked('m', stdout); putc_unlocked('\xe2', stdout); putc_unlocked('\x96', stdout); putc_unlocked('\x88', stdout); putc_unlocked('\x1b', stdout); putc_unlocked('[', stdout); putc_unlocked('0', stdout); putc_unlocked('m', stdout);
+        putc_unlocked('m', stdout);
+        putc_unlocked('\xe2', stdout); putc_unlocked('\x96', stdout); putc_unlocked('\x88', stdout);
+        putc_unlocked('\x1b', stdout); putc_unlocked('[', stdout); putc_unlocked('0', stdout); putc_unlocked('m', stdout);
       }
       putc_unlocked('\n', stdout);
     }
