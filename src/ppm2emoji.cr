@@ -15,6 +15,8 @@ class Player
   def initialize
     @line1 = Array(Pixel).new
     @line2 = Array(Pixel).new
+    @emojis = Array(Emoji).new(3000)
+    Emoji.load {|e| @emojis << e}
   end
 
   def get_ascii_int_from_stdin
@@ -43,14 +45,36 @@ class Player
     {width, height, max}
   end
 
-  def display
-    @line1.each { |p| p.to_c }
-    puts
-    @line2.each { |p| p.to_c }
+  def nearest_emoji(q2, q1, q3, q4)
+    e = @emojis.first
+    d = e.distance(q1, q2, q3, q4)
+    @emojis.each do |this_e|
+      this_d = this_e.distance(q1, q2, q3, q4)
+      if this_d < d
+        d = this_d
+        e = this_e
+      end
+    end
+    e.emoji
+  end
+
+  def display_emoji
+    x = @line1.size
+    (x/2).times do |i|
+      j = i*2
+      STDOUT << nearest_emoji(@line1[j], @line1[j+1], @line2[j], @line2[j+1])
+    end
     puts
   end
 
-  def run
+  def display_block
+    @line1.each {|p| p.to_c }
+    puts
+    @line2.each {|p| p.to_c }
+    puts
+  end
+
+  def run(emoji)
     STDOUT.blocking = false
     loop {
       start = Time.now
@@ -61,7 +85,7 @@ class Player
       (y/2).times {
         x.times { |i| @line1[i] = read_pixel }
         x.times { |i| @line2[i] = read_pixel }
-        display
+        emoji ? display_emoji : display_block
       }
       (y%2).times { read_pixel }
       # p Time.now-start
@@ -69,4 +93,4 @@ class Player
   end
 end
 
-Player.new.run
+Player.new.run(ARGV[0]? == "emoji")
