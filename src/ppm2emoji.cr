@@ -16,7 +16,7 @@ class Player
     @line1 = Array(Pixel).new
     @line2 = Array(Pixel).new
     @emojis = Array(Emoji).new(3000)
-    Emoji.load {|e| @emojis << e}
+    Emoji.load("good") {|e| @emojis << e}
   end
 
   def get_ascii_int_from_stdin
